@@ -1,0 +1,60 @@
+{
+  "personal": {
+    "name": "Salman Sheriff",
+    "title": "Backend & Software Engineer",
+    "tagline": "BUILDING ELEGANT SOLUTIONS FROM IDEA TO EXECUTION. High-performance backend architecture meets artistic user interface precision.",
+    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuCT9fcworRaWBMy5DWwaXjUXA8mSgZOLb1t-gQlCCKPro8je0FqgugpIjH3s-vnwb59dCJfWipL6Ltzr9lWjB2m2pOJhQbrwE0dmL_vQ35IwyyHYvr0qvwDhPSuILDwXJXSI_w94R7vI3qw-nZMI4uIkoOhhRt40Wz7S5yVLRo3lHXtIJwE5CDuxYea3FPVDkzCet782eMtTmDzB0FY947fSNTgdFTOiL9DxNxJHTCP1KEgn3KauyHgsFV-n3_71Frm4cQLvwFnO8GC",
+    "email": "contact@salman.dev",
+    "socials": {
+      "github": "https://github.com",
+      "linkedin": "https://linkedin.com",
+      "twitter": "https://twitter.com",
+      "codepen": "https://codepen.io"
+    },
+    "philosophy": "I believe that software should be as resilient as it is beautiful. My focus is on creating scalable, clean, and maintainable systems that empower users. With a deep foundation in full-stack architecture, I bridge the gap between complex logic and seamless human-computer interaction.",
+    "stats": {
+      "experience": "5+",
+      "commits": "120+"
+    }
+  },
+  "skills": {
+    "languages": ["TypeScript", "Python", "Rust", "Go", "SQL", "C++"],
+    "frameworks": [
+      "Next.js",
+      "React",
+      "Node.js",
+      "TailwindCSS",
+      "FastAPI",
+      "PyTorch",
+      "Express"
+    ],
+    "tools": [
+      "Docker",
+      "Kubernetes",
+      "Git",
+      "Figma",
+      "PostgreSQL",
+      "AWS",
+      "Redis",
+      "Linux"
+    ]
+  },
+  "projects": [
+    {
+      "title": "NEURAL FLOW",
+      "description": "A real-time visualizer for complex machine learning models. Built with Three.js and Python backend.",
+      "tag": "AI MODEL",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuC3eKwNN72SuIzDM2qemGNkRuHJ9L0gufCeGan2IMc14iH2LA8U9u3Cr8fVoed6oW9Nl326BGaCLKl8bHr80agBZVGMTgbpGoWeEpynC7O8jV1tPmZIZRvKFHji_4LY2dQunBIIvEXrJLFaPJDN-GPuHeGvsi-Qzt8p1eL4EgwYcTvs7pUSP6YkTD50DCB-F0YUztIyNHLzEl70MbmCZyFmHlIcbCPOpa2kU-l8Zskm0__6CT50nfkOkm_DZh-sfe4bT28Edx6Ai9li",
+      "alt": "A futuristic software dashboard interface showing complex data visualizations, network graphs, and glowing line charts in a neon blue and dark grey theme.",
+      "link": "#"
+    },
+    {
+      "title": "CRYPTO VAULT",
+      "description": "Highly secure mobile wallet featuring biometric encryption and cross-chain transactions.",
+      "tag": "FINTECH",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDACQOu9MFm4UpVAPINo0RkHKcu7XlK9WdLtEQUiTVbH35NNh0zZpiOy6DNqsajzZHXI2q_qDhgUZFUxWZruO73ovmFXo_WyHHDSx5ahiG6e6zKy8lrDrHNu0PxEtpLElO94ikqrBG1UVRfIf2V36mlAuRd_MbQ-PzkHQCBTiSKyibnMC6yVQRRX12sVxTsc54MCdDtmww7Jxs3HpVdsNuu2HGtb5vVMVA99uiMIbicMnNhlCYsF31aeKBHWl6fDaY4sSiJTKShCXYS",
+      "alt": "An ultra-modern mobile application interface mockup displaying a sleek cryptocurrency wallet.",
+      "link": "#"
+    }
+  ]
+}
