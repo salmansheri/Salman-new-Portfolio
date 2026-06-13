@@ -3,6 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 import { useRef } from "react";
 import portfolioData from "@/data/portfolio.json";
 
@@ -108,7 +109,7 @@ export default function Projects() {
 
               {/* Action trigger */}
               <div className="pt-4">
-                <a
+                <Link
                   href={project.link}
                   className="inline-flex items-center gap-2 text-primary-fixed font-code text-xs font-semibold uppercase tracking-wider transition-all duration-300 group-hover:gap-4 hover:text-primary-fixed-dim"
                 >
@@ -116,7 +117,7 @@ export default function Projects() {
                   <span className="material-symbols-outlined text-sm select-none transition-transform duration-300 group-hover:translate-x-1">
                     arrow_forward
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
