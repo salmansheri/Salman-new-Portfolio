@@ -3,38 +3,39 @@
     "name": "Salman Sheriff",
     "title": "Backend & Software Engineer",
     "tagline": "BUILDING ELEGANT SOLUTIONS FROM IDEA TO EXECUTION. High-performance backend architecture meets artistic user interface precision.",
-    "avatar": "https://lh3.googleusercontent.com/aida-public/AB6AXuCT9fcworRaWBMy5DWwaXjUXA8mSgZOLb1t-gQlCCKPro8je0FqgugpIjH3s-vnwb59dCJfWipL6Ltzr9lWjB2m2pOJhQbrwE0dmL_vQ35IwyyHYvr0qvwDhPSuILDwXJXSI_w94R7vI3qw-nZMI4uIkoOhhRt40Wz7S5yVLRo3lHXtIJwE5CDuxYea3FPVDkzCet782eMtTmDzB0FY947fSNTgdFTOiL9DxNxJHTCP1KEgn3KauyHgsFV-n3_71Frm4cQLvwFnO8GC",
+    "avatar": "./salman.jpg",
     "email": "contact@salman.dev",
     "socials": {
-      "github": "https://github.com",
-      "linkedin": "https://linkedin.com",
-      "twitter": "https://twitter.com",
-      "codepen": "https://codepen.io"
+      "github": "https://github.com/salmansheri",
+      "linkedin": "https://www.linkedin.com/in/salman-sheriff-6b3721214/",
+      "twitter": "https://twitter.com"
+
     },
     "philosophy": "I believe that software should be as resilient as it is beautiful. My focus is on creating scalable, clean, and maintainable systems that empower users. With a deep foundation in full-stack architecture, I bridge the gap between complex logic and seamless human-computer interaction.",
     "stats": {
-      "experience": "5+",
+      "experience": "1+",
       "commits": "120+"
     }
   },
   "skills": {
-    "languages": ["TypeScript", "Python", "Rust", "Go", "SQL", "C++"],
+    "languages": ["TypeScript", "Python", "SQL", "C++", "C", "C#", "Java"],
     "frameworks": [
       "Next.js",
       "React",
       "Node.js",
       "TailwindCSS",
-      "FastAPI",
-      "PyTorch",
-      "Express"
+      "Express",
+      "Spring Boot",
+      ".Net Core"
     ],
     "tools": [
       "Docker",
-      "Kubernetes",
       "Git",
       "Figma",
       "PostgreSQL",
-      "AWS",
+
+      "Google Stitch",
+      "Google Antigravity CLI",
       "Redis",
       "Linux"
     ]
@@ -42,142 +43,49 @@
   "projects": [
     {
       "title": "Employee Management",
-      "slug": "neural-flow",
-      "description": "A real-time visualizer for complex machine learning models. Built with Three.js and Python backend.",
-      "tag": "AI MODEL",
-      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuC3eKwNN72SuIzDM2qemGNkRuHJ9L0gufCeGan2IMc14iH2LA8U9u3Cr8fVoed6oW9Nl326BGaCLKl8bHr80agBZVGMTgbpGoWeEpynC7O8jV1tPmZIZRvKFHji_4LY2dQunBIIvEXrJLFaPJDN-GPuHeGvsi-Qzt8p1eL4EgwYcTvs7pUSP6YkTD50DCB-F0YUztIyNHLzEl70MbmCZyFmHlIcbCPOpa2kU-l8Zskm0__6CT50nfkOkm_DZh-sfe4bT28Edx6Ai9li",
-      "alt": "A futuristic software dashboard interface showing complex data visualizations, network graphs, and glowing line charts in a neon blue and dark grey theme.",
-      "link": "/project/neural-flow",
+      "slug": "emp",
+      "description": "A high-performance, full-stack Employee Management System built with Java Spring Boot and React. Features a fluid, responsive dashboard styled with Tailwind CSS and GSAP to deliver real-time attendance tracking, dynamic task allocation, and secure data management without operational lag",
+      "tag": "WEB APP",
+      "image": "./emp.png",
+      "alt": "",
+      "link": "/project/emp",
       "status": "In Progress",
-      "clientName": "Cognitive AI Labs",
-      "startDate": "Jan 2026",
-      "endDate": "Aug 2026",
-      "budget": 120000,
+      "clientName": "",
+      "startDate": "",
+      "endDate": "",
+      "budget": 0,
       "progress": 75,
       "projectLead": {
         "name": "Salman Sheriff",
-        "role": "Systems Lead",
-        "email": "salman@salman.dev"
-      },
-      "milestones": [
-        {
-          "id": "nf-m1",
-          "name": "Model Architecture Design",
-          "description": "Define Three.js neural layers and PyTorch backend communication protocols.",
-          "status": "completed",
-          "dueDate": "Feb 28, 2026"
-        },
-        {
-          "id": "nf-m2",
-          "name": "Three.js Visualizer Engine",
-          "description": "Implement high-performance particle system rendering and custom shaders.",
-          "status": "completed",
-          "dueDate": "May 15, 2026"
-        },
-        {
-          "id": "nf-m3",
-          "name": "Real-time Websocket Bindings",
-          "description": "Establish sub-10ms websocket pipes between Python runner and client.",
-          "status": "in-progress",
-          "dueDate": "Jul 30, 2026"
-        },
-        {
-          "id": "nf-m4",
-          "name": "User Auth & Dashboard UI",
-          "description": "Build user profiles, preset models, and sharing modules.",
-          "status": "pending",
-          "dueDate": "Aug 25, 2026"
-        }
-      ],
-      "team": [
-        {
-          "id": "1",
-          "name": "Salman Sheriff",
-          "role": "Backend & Systems Engineer",
-          "email": "salman@salman.dev"
-        },
-        {
-          "id": "2",
-          "name": "Sarah Jenkins",
-          "role": "WebGL/UI Designer",
-          "email": "sarah.j@example.com"
-        },
-        {
-          "id": "3",
-          "name": "David Chen",
-          "role": "ML Developer",
-          "email": "david.c@example.com"
-        }
-      ]
+        "role": "Developer",
+        "email": "sheriffsalman00@gmail.com"
+      }
+
     },
     {
-      "title": "CRYPTO VAULT",
-      "slug": "crypto-vault",
-      "description": "Highly secure mobile wallet featuring biometric encryption and cross-chain transactions.",
-      "tag": "FINTECH",
-      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDACQOu9MFm4UpVAPINo0RkHKcu7XlK9WdLtEQUiTVbH35NNh0zZpiOy6DNqsajzZHXI2q_qDhgUZFUxWZruO73ovmFXo_WyHHDSx5ahiG6e6zKy8lrDrHNu0PxEtpLElO94ikqrBG1UVRfIf2V36mlAuRd_MbQ-PzkHQCBTiSKyibnMC6yVQRRX12sVxTsc54MCdDtmww7Jxs3HpVdsNuu2HGtb5vVMVA99uiMIbicMnNhlCYsF31aeKBHWl6fDaY4sSiJTKShCXYS",
-      "alt": "An ultra-modern mobile application interface mockup displaying a sleek cryptocurrency wallet.",
-      "link": "/project/crypto-vault",
-      "status": "Completed",
-      "clientName": "Aegis Finance Ltd",
-      "startDate": "Oct 2025",
-      "endDate": "Mar 2026",
-      "budget": 95000,
-      "progress": 100,
+      "title": "Patient management System",
+      "slug": "pms",
+      "description": "A modern, full-stack Patient Management System engineered for seamless healthcare administration. Built with a Next.js and Framer Motion frontend for server-side efficiency and fluid UI transitions, the application is backed by a robust Java Spring Boot architecture. It provides a secure, responsive platform for managing patient records, clinical workflows, and real-time scheduling with optimal data persistence.",
+      "tag": "WEB APP",
+      "image": "./pms.png",
+      "alt": "",
+      "link": "/project/pms",
+      "status": "On going",
+      "clientName": "",
+      "startDate": "",
+      "endDate": "",
+      "budget": 0,
+      "progress": 80,
       "projectLead": {
         "name": "Salman Sheriff",
-        "role": "Security Lead",
-        "email": "salman@salman.dev"
+        "role": "Developer",
+        "email": "sheriffsalman00@gmail.com"
       },
       "milestones": [
-        {
-          "id": "cv-m1",
-          "name": "Encryption Protocol Spec",
-          "description": "Establish biometric keyring structure and AES-GCM secure enclave bindings.",
-          "status": "completed",
-          "dueDate": "Nov 10, 2025"
-        },
-        {
-          "id": "cv-m2",
-          "name": "Cross-chain Bridge Adapter",
-          "description": "Build secure relayer bridges supporting EVM and non-EVM chains.",
-          "status": "completed",
-          "dueDate": "Jan 20, 2026"
-        },
-        {
-          "id": "cv-m3",
-          "name": "Beta Mobile App Release",
-          "description": "Distribute TestFlight and Play Store internal builds for testing.",
-          "status": "completed",
-          "dueDate": "Feb 28, 2026"
-        },
-        {
-          "id": "cv-m4",
-          "name": "Third-party Security Audit",
-          "description": "Complete security pentests and clear security audit checklist.",
-          "status": "completed",
-          "dueDate": "Mar 15, 2026"
-        }
+
       ],
       "team": [
-        {
-          "id": "1",
-          "name": "Salman Sheriff",
-          "role": "Lead Architect",
-          "email": "salman@salman.dev"
-        },
-        {
-          "id": "2",
-          "name": "Amina Yusuf",
-          "role": "Mobile Engineer",
-          "email": "amina.y@example.com"
-        },
-        {
-          "id": "3",
-          "name": "Kenji Tanaka",
-          "role": "QA Specialist",
-          "email": "kenji.t@example.com"
-        }
+
       ]
     }
   ]

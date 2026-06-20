@@ -98,12 +98,13 @@ export default function Navbar() {
           </button>
 
           {/* Resume Button */}
-          <button
-            type="button"
+          <a
+            href="./resume/resume.pdf"
+            download="resume.pdf"
             className="bg-primary-fixed text-on-primary-container hover:bg-primary-fixed-dim px-6 py-2 rounded-full font-bold hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_15px_rgba(0,219,233,0.2)] cursor-pointer"
           >
             Resume
-          </button>
+          </a>
         </div>
 
         {/* Hamburger Menu Toggle (Mobile/Tablet) */}

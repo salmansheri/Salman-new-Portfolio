@@ -48,14 +48,7 @@ export default function Footer() {
           >
             Twitter
           </a>
-          <a
-            className="text-on-surface-variant hover:text-primary-fixed transition-colors font-code text-xs font-semibold uppercase tracking-wider select-none"
-            href={portfolioData.personal.socials.codepen}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            CodePen
-          </a>
+
         </div>
 
         {/* Copyright */}

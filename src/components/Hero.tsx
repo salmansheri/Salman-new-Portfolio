@@ -155,7 +155,7 @@ export default function Hero() {
       >
         <div className="absolute inset-0 rounded-full neon-border animate-pulse-slow"></div>
         <div className="absolute inset-3 rounded-full overflow-hidden border border-foreground/10 dark:border-white/10 glass-card">
-          {/* biome-ignore lint/performance/noImgElement: External mockup URL */}
+
           <img
             alt={portfolioData.personal.name}
             className="w-full h-full object-cover"

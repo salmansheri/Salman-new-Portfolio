@@ -90,9 +90,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               | "On Hold"
               | "Blocked"
           }
-          clientName={project.clientName}
-          startDate={project.startDate}
-          endDate={project.endDate}
+          clientName={""}
+          startDate={""}
+          endDate={""}
           budget={project.budget}
           currencyCode="USD"
           projectLead={project.projectLead}
@@ -100,7 +100,9 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           progress={project.progress}
           milestones={project.milestones as Milestone[]}
           team={project.team as TeamMember[]}
-          onPrimaryAction={handleEdit}
+          onPrimaryAction={() =>{
+            window.localStorage.href = "/"
+          }}
           onSecondaryAction={handleShare}
           onBack={handleBack}
         />

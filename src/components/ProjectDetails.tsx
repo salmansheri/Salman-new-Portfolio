@@ -148,7 +148,7 @@ export default function ProjectDetails({
   team = [],
   onPrimaryAction,
   onSecondaryAction,
-  primaryActionLabel = "Edit Project",
+  primaryActionLabel = "Visit",
   secondaryActionLabel = "Share",
   onBack,
 }: ProjectDetailsProps) {
@@ -304,9 +304,7 @@ export default function ProjectDetails({
               onClick={onPrimaryAction}
               className="bg-primary-fixed text-on-primary-container hover:bg-primary-fixed-dim hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_15px_rgba(0,219,233,0.15)] flex items-center gap-2 px-6 py-2.5 rounded-xl font-body text-sm font-bold transition-all duration-300 cursor-pointer"
             >
-              <span className="material-symbols-outlined text-base select-none">
-                edit
-              </span>
+
               {primaryActionLabel}
             </button>
           )}
