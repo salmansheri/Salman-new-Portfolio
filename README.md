@@ -1,6 +1,6 @@
 # Salman Sheriff Portfolio App
 
-A premium, high-performance portfolio application built with Next.js 16, React 19, Tailwind CSS v4, and dynamic GSAP animations. This project features full-page responsiveness, a bento-style design layout, dark/light theme options, and custom project detail views loaded from local portfolio configurations.
+A premium, high-performance developer portfolio application built with Next.js 16, React 19, Tailwind CSS v4, and dynamic GSAP animations. This project features full-page responsiveness, a bento-style design layout, dark/light theme options, and dynamic project detail views loaded from local portfolio configurations.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ A premium, high-performance portfolio application built with Next.js 16, React 1
 
 - **Dynamic Interactive Bento Layout**: Fluid components utilizing micro-scaling and active translation transitions.
 - **GSAP Scroll Trigger Animations**: High-fidelity entrance reveals, staggered fades, and scroll-triggered motion effects.
-- **Dynamic Project Details Pages**: Dynamically resolved sub-routes under `/project/[slug]` rendering rich metadata, milestones progress rings, and team rosters.
+- **Dynamic Project Details Pages**: Redesigned dynamic sub-routes under `/project/[slug]` rendering full-width hero header cards, custom metadata sections (Client, Role, Timeline), and a bento achievements grid.
 - **Integrated Theme System**: Light and Dark mode toggles saving preferences to local storage with anti-flash script initialization.
 - **Built-in Quality Gates**: Strict syntax and styling formatting enforced via Biome.
 
@@ -129,11 +129,20 @@ The portfolio details are configured in **[`src/data/portfolio.json`](file:///mn
   "endDate": "End Month",
   "budget": 120000,
   "progress": 75,
+  "tech": ["Framework1", "Library2", "Database3"],
   "projectLead": {
     "name": "Lead Name",
     "role": "Lead Role Title",
     "email": "lead@domain.com"
   },
+  "achievements": [
+    {
+      "title": "Achievement Title",
+      "description": "Elaborate detail of achievement.",
+      "icon": "speed",
+      "span": 1
+    }
+  ],
   "milestones": [
     {
       "id": "unique-m1",

@@ -9,7 +9,6 @@
       "github": "https://github.com/salmansheri",
       "linkedin": "https://www.linkedin.com/in/salman-sheriff-6b3721214/",
       "twitter": "https://twitter.com"
-
     },
     "philosophy": "I believe that software should be as resilient as it is beautiful. My focus is on creating scalable, clean, and maintainable systems that empower users. With a deep foundation in full-stack architecture, I bridge the gap between complex logic and seamless human-computer interaction.",
     "stats": {
@@ -59,8 +58,22 @@
         "name": "Salman Sheriff",
         "role": "Developer",
         "email": "sheriffsalman00@gmail.com"
-      }
-
+      },
+      "tech": ["Spring Boot", "React", "GSAP", "Tailwind CSS"],
+      "achievements": [
+        {
+          "title": "Real-time Metrics",
+          "description": "Integrated sub-5ms WebSocket connections to sync task assignments and attendance reports across dashboards.",
+          "icon": "speed",
+          "span": 1
+        },
+        {
+          "title": "Enterprise Architecture",
+          "description": "Designed multi-tenant Spring security protocols and seed databases, optimizing query throughput by 30%.",
+          "icon": "memory",
+          "span": 2
+        }
+      ]
     },
     {
       "title": "Patient management System",
@@ -81,12 +94,23 @@
         "role": "Developer",
         "email": "sheriffsalman00@gmail.com"
       },
-      "milestones": [
-
+      "tech": ["Next.js", "Java Spring", "Framer Motion", "PostgreSQL"],
+      "achievements": [
+        {
+          "title": "Zero-Trust Encryption",
+          "description": "Enforced secure enclave DB encryption for patient health records to align with strict HIPAA standards.",
+          "icon": "security",
+          "span": 2
+        },
+        {
+          "title": "Dynamic Scheduler",
+          "description": "Engineered automated clinical scheduling pipelines that reduced appointment overlap by 40%.",
+          "icon": "calendar_month",
+          "span": 1
+        }
       ],
-      "team": [
-
-      ]
+      "milestones": [],
+      "team": []
     }
   ]
 }

@@ -21,6 +21,13 @@ export interface Milestone {
   dueDate?: string;
 }
 
+export interface Achievement {
+  title: string;
+  description: string;
+  icon: string;
+  span?: number; // grid col span: 1 or 2
+}
+
 export interface ProjectDetailsProps {
   title: string;
   status:
@@ -35,6 +42,10 @@ export interface ProjectDetailsProps {
   endDate: string;
   budget: number;
   currencyCode?: string;
+  image?: string;
+  alt?: string;
+  tech?: string[];
+  achievements?: Achievement[];
   projectLead: {
     name: string;
     role: string;
@@ -139,22 +150,27 @@ export default function ProjectDetails({
   clientName,
   startDate,
   endDate,
-  budget,
-  currencyCode = "USD",
+  tech = [],
+  achievements = [],
   projectLead,
   description,
   progress,
+  image,
+  alt = "Project Visualization",
   milestones = [],
   team = [],
   onPrimaryAction,
   onSecondaryAction,
-  primaryActionLabel = "Visit",
+  primaryActionLabel = "Edit Project",
   secondaryActionLabel = "Share",
   onBack,
 }: ProjectDetailsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const breadcrumbRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const metadataRef = useRef<HTMLDivElement>(null);
+  const achievementsRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
 
@@ -162,11 +178,25 @@ export default function ProjectDetails({
     () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Header reveal: slides down and fades in
+      // Breadcrumb animation
+      gsap.fromTo(
+        breadcrumbRef.current,
+        { y: -10, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
+      );
+
+      // Hero image zoom reveal
+      gsap.fromTo(
+        heroRef.current,
+        { scale: 0.98, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.8, ease: "power3.out", delay: 0.1 },
+      );
+
+      // Header title reveal
       gsap.fromTo(
         headerRef.current,
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: "power2.out", delay: 0.2 },
       );
 
       // Metadata cards stagger fade-in and slide-up
@@ -183,6 +213,26 @@ export default function ProjectDetails({
             scrollTrigger: {
               trigger: metadataRef.current,
               start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      }
+
+      // Achievements grid entry
+      if (achievementsRef.current) {
+        gsap.fromTo(
+          achievementsRef.current.children,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: achievementsRef.current,
+              start: "top 85%",
               toggleActions: "play none none none",
             },
           },
@@ -238,42 +288,58 @@ export default function ProjectDetails({
 
   const statusStyle = getStatusStyles(status);
 
-  // Format currency
-  const formattedBudget = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: currencyCode,
-    maximumFractionDigits: 0,
-  }).format(budget);
-
   return (
-    <div ref={containerRef} className="space-y-8 max-w-7xl mx-auto py-6">
-      {/* 1. Header Section */}
+    <div ref={containerRef} className="space-y-12 max-w-7xl mx-auto py-6">
+      {/* Breadcrumb Navigation */}
+      <div
+        ref={breadcrumbRef}
+        className="flex items-center gap-3 text-on-surface-variant font-code text-xs tracking-widest uppercase mb-4"
+      >
+        {onBack ? (
+          <button
+            type="button"
+            onClick={onBack}
+            className="hover:text-primary-fixed transition-colors duration-200 cursor-pointer"
+          >
+            Work
+          </button>
+        ) : (
+          <span className="text-on-surface-variant">Work</span>
+        )}
+        <span className="material-symbols-outlined text-sm select-none text-outline-variant">
+          chevron_right
+        </span>
+        <span className="text-foreground font-semibold">{title}</span>
+      </div>
+
+      {/* Hero Header Section with zoom-in card */}
+      {image && (
+        <div
+          ref={heroRef}
+          className="w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden glass-card relative group shadow-[0_15px_30px_rgba(0,0,0,0.3)]"
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent z-10" />
+          {/* biome-ignore lint/performance/noImgElement: Project hero image */}
+          <img
+            src={image}
+            alt={alt}
+            className="w-full h-full object-cover opacity-80 group-hover:scale-[1.03] transition-transform duration-700 ease-out select-none"
+          />
+        </div>
+      )}
+
+      {/* Title & Overview with buttons */}
       <div
         ref={headerRef}
-        className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-foreground/5 dark:border-white/5 pb-6"
+        className="flex flex-col lg:flex-row lg:items-start justify-between gap-6"
       >
-        <div className="space-y-3">
-          {/* Back Trigger */}
-          {onBack && (
-            <button
-              type="button"
-              onClick={onBack}
-              className="group inline-flex items-center gap-2 font-code text-xs text-on-surface-variant hover:text-primary-fixed transition-colors duration-200 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-sm select-none transition-transform duration-200 group-hover:-translate-x-1">
-                arrow_back
-              </span>
-              Back to Dashboard
-            </button>
-          )}
-
-          {/* Title & Status Badge */}
+        <div className="space-y-4 max-w-3xl">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-body text-2xl md:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight select-none">
+            <h1 className="font-body text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary-fixed tracking-tight uppercase select-none">
               {title}
             </h1>
             <div
-              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${statusStyle.bg} ${statusStyle.text} ${statusStyle.border} select-none`}
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[10px] font-bold border ${statusStyle.bg} ${statusStyle.text} ${statusStyle.border} uppercase tracking-wider select-none`}
             >
               <span
                 className={`w-1.5 h-1.5 rounded-full ${statusStyle.dot} animate-pulse`}
@@ -281,10 +347,13 @@ export default function ProjectDetails({
               {status}
             </div>
           </div>
+          <p className="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
+            {description}
+          </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 self-start lg:self-center">
           {onSecondaryAction && (
             <button
               type="button"
@@ -304,110 +373,106 @@ export default function ProjectDetails({
               onClick={onPrimaryAction}
               className="bg-primary-fixed text-on-primary-container hover:bg-primary-fixed-dim hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_15px_rgba(0,219,233,0.15)] flex items-center gap-2 px-6 py-2.5 rounded-xl font-body text-sm font-bold transition-all duration-300 cursor-pointer"
             >
-
+              <span className="material-symbols-outlined text-base select-none">
+                edit
+              </span>
               {primaryActionLabel}
             </button>
           )}
         </div>
       </div>
 
-      {/* 2. Metadata Grid */}
-      <div
+      {/* Metadata Banner Box */}
+      <section
         ref={metadataRef}
-        className="grid grid-cols-2 lg:grid-cols-4 gap-bento-gap"
+        className="glass-card rounded-xl p-6 md:p-8 flex flex-wrap gap-8 md:gap-12 justify-between"
       >
-        {/* Client Card */}
-        <div className="glass-card p-5 rounded-2xl flex items-start gap-4">
-          <div className="p-2.5 rounded-xl bg-primary-fixed/10 dark:bg-primary-fixed/5 border border-primary-fixed/20 text-primary-fixed flex items-center justify-center">
-            <span className="material-symbols-outlined text-xl select-none">
-              business
-            </span>
-          </div>
-          <div className="space-y-1">
-            <span className="block font-code text-[10px] tracking-widest text-on-surface-variant uppercase font-semibold">
-              Client Name
-            </span>
-            <span className="block font-body text-sm md:text-base font-bold text-foreground truncate max-w-[140px] md:max-w-[200px]">
-              {clientName}
-            </span>
-          </div>
+        <div className="flex flex-col gap-2">
+          <span className="font-code text-[11px] tracking-widest text-primary-fixed opacity-80 uppercase font-semibold">
+            Client
+          </span>
+          <span className="font-body text-base font-semibold text-foreground">
+            {clientName}
+          </span>
         </div>
-
-        {/* Schedule/Duration Card */}
-        <div className="glass-card p-5 rounded-2xl flex items-start gap-4">
-          <div className="p-2.5 rounded-xl bg-secondary-container/10 border border-secondary-container/20 text-secondary flex items-center justify-center">
-            <span className="material-symbols-outlined text-xl select-none">
-              calendar_today
-            </span>
-          </div>
-          <div className="space-y-1">
-            <span className="block font-code text-[10px] tracking-widest text-on-surface-variant uppercase font-semibold">
-              Timeline
-            </span>
-            <span className="block font-body text-sm md:text-base font-bold text-foreground">
-              {startDate} - {endDate}
-            </span>
-          </div>
+        <div className="flex flex-col gap-2">
+          <span className="font-code text-[11px] tracking-widest text-primary-fixed opacity-80 uppercase font-semibold">
+            Role
+          </span>
+          <span className="font-body text-base font-semibold text-foreground">
+            {projectLead.role}
+          </span>
         </div>
-
-        {/* Budget Card */}
-        <div className="glass-card p-5 rounded-2xl flex items-start gap-4">
-          <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 dark:text-emerald-400 flex items-center justify-center">
-            <span className="material-symbols-outlined text-xl select-none">
-              payments
-            </span>
-          </div>
-          <div className="space-y-1">
-            <span className="block font-code text-[10px] tracking-widest text-on-surface-variant uppercase font-semibold">
-              Budget Allocated
-            </span>
-            <span className="block font-body text-sm md:text-base font-bold text-foreground">
-              {formattedBudget}
-            </span>
-          </div>
+        <div className="flex flex-col gap-2">
+          <span className="font-code text-[11px] tracking-widest text-primary-fixed opacity-80 uppercase font-semibold">
+            Timeline
+          </span>
+          <span className="font-body text-base font-semibold text-foreground">
+            {startDate} - {endDate}
+          </span>
         </div>
-
-        {/* Project Lead Card */}
-        <div className="glass-card p-5 rounded-2xl flex items-start gap-4">
-          <div className="p-2.5 rounded-xl bg-tertiary-fixed/10 border border-tertiary-fixed/20 text-tertiary-fixed-dim flex items-center justify-center">
-            <span className="material-symbols-outlined text-xl select-none">
-              supervisor_account
+        {tech.length > 0 && (
+          <div className="flex flex-col gap-2">
+            <span className="font-code text-[11px] tracking-widest text-primary-fixed opacity-80 uppercase font-semibold">
+              Tech Stack
             </span>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {tech.map((t) => (
+                <span
+                  key={t}
+                  className="px-3 py-1 bg-primary-fixed/10 text-primary-fixed rounded-full font-code text-xs border border-primary-fixed/20 select-none"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="space-y-1">
-            <span className="block font-code text-[10px] tracking-widest text-on-surface-variant uppercase font-semibold">
-              Project Lead
-            </span>
-            <span className="block font-body text-sm md:text-base font-bold text-foreground truncate max-w-[140px] md:max-w-[200px]">
-              {projectLead.name}
-            </span>
-          </div>
-        </div>
-      </div>
+        )}
+      </section>
 
-      {/* 3. Content Area: Layout for Description, Progress, and Milestones */}
-      <div
-        ref={contentRef}
-        className="grid grid-cols-1 lg:grid-cols-3 gap-bento-gap"
-      >
-        {/* Left 2 Columns: Description & Milestones */}
-        <div className="lg:col-span-2 space-y-bento-gap">
-          {/* Description Block */}
-          <div className="glass-card p-6 md:p-8 rounded-2xl space-y-4">
-            <h2 className="font-body text-lg font-bold text-primary-fixed uppercase tracking-wider border-b border-foreground/5 dark:border-white/5 pb-3 flex items-center gap-2">
-              <span className="material-symbols-outlined select-none">
-                description
-              </span>
-              Project Overview
-            </h2>
-            <p className="font-body text-on-surface-variant text-sm md:text-base leading-relaxed whitespace-pre-wrap">
-              {description}
-            </p>
+      {/* Technical Achievements Redesign Section */}
+      {achievements.length > 0 && (
+        <section className="space-y-6">
+          <h2 className="font-body text-xl md:text-2xl font-bold text-foreground uppercase tracking-wider border-b border-foreground/5 dark:border-white/5 pb-4 flex items-center gap-2">
+            <span className="material-symbols-outlined text-primary-fixed select-none">
+              emoji_events
+            </span>
+            Technical Achievements
+          </h2>
+          <div
+            ref={achievementsRef}
+            className="grid grid-cols-1 md:grid-cols-3 gap-bento-gap"
+          >
+            {achievements.map((ach) => (
+              <div
+                key={ach.title}
+                className={`glass-card rounded-xl p-8 flex flex-col gap-4 items-start group hover:bg-surface-container/20 transition-all duration-300 ${
+                  ach.span === 2 ? "md:col-span-2" : "md:col-span-1"
+                }`}
+              >
+                <div className="w-12 h-12 rounded-full bg-primary-fixed/10 flex items-center justify-center border border-primary-fixed/20 mb-2">
+                  <span className="material-symbols-outlined text-primary-fixed text-xl select-none">
+                    {ach.icon}
+                  </span>
+                </div>
+                <h3 className="font-body text-lg md:text-xl font-bold text-foreground group-hover:text-primary-fixed transition-colors duration-200">
+                  {ach.title}
+                </h3>
+                <p className="font-body text-sm text-on-surface-variant leading-relaxed flex-grow">
+                  {ach.description}
+                </p>
+              </div>
+            ))}
           </div>
+        </section>
+      )}
 
-          {/* Milestones Block */}
-          {milestones.length > 0 && (
-            <div className="glass-card p-6 md:p-8 rounded-2xl space-y-6">
+      {/* Secondary Details: Milestones & Progress Tracker */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-bento-gap">
+        {/* Left Column: Milestones Checklist */}
+        {milestones.length > 0 && (
+          <div ref={contentRef} className="lg:col-span-2 space-y-6">
+            <div className="glass-card p-6 md:p-8 rounded-xl space-y-6">
               <div className="flex items-center justify-between border-b border-foreground/5 dark:border-white/5 pb-3">
                 <h2 className="font-body text-lg font-bold text-primary-fixed uppercase tracking-wider flex items-center gap-2">
                   <span className="material-symbols-outlined select-none">
@@ -471,14 +536,12 @@ export default function ProjectDetails({
                 ))}
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        {/* Right 1 Column: Health / Progress Circular Widget */}
+        {/* Right Column: Health / Progress Circular Tracker */}
         <div className="space-y-bento-gap">
-          {/* Progress Circular & Linear Combo */}
-          <div className="glass-card p-6 md:p-8 rounded-2xl flex flex-col items-center justify-between text-center min-h-[350px] relative overflow-hidden">
-            {/* Visual background glow */}
+          <div className="glass-card p-6 md:p-8 rounded-xl flex flex-col items-center justify-between text-center min-h-[350px] relative overflow-hidden">
             <div className="absolute -top-12 -right-12 w-28 h-28 bg-primary-fixed/10 blur-2xl rounded-full pointer-events-none" />
             <div className="absolute -bottom-12 -left-12 w-28 h-28 bg-secondary-container/10 blur-2xl rounded-full pointer-events-none" />
 
@@ -517,7 +580,6 @@ export default function ProjectDetails({
                   strokeLinecap="round"
                 />
               </svg>
-              {/* Inner Label */}
               <div className="absolute flex flex-col items-center justify-center">
                 <span className="font-body text-3xl font-extrabold text-foreground">
                   {progress}%
@@ -528,7 +590,6 @@ export default function ProjectDetails({
               </div>
             </div>
 
-            {/* Progress Details and Lead */}
             <div className="w-full space-y-4">
               <div className="space-y-1">
                 <div className="flex justify-between font-code text-xs text-on-surface-variant font-semibold">
@@ -537,7 +598,6 @@ export default function ProjectDetails({
                     STABLE
                   </span>
                 </div>
-                {/* Linear Tracker (fallback visual indicator) */}
                 <div className="h-2 w-full bg-surface-container rounded-full overflow-hidden border border-outline-variant/30">
                   <div
                     className="h-full bg-gradient-to-r from-primary-fixed-dim to-primary-fixed rounded-full transition-all duration-1000 ease-out"
@@ -546,10 +606,10 @@ export default function ProjectDetails({
                 </div>
               </div>
 
-              {/* Mini Project Lead Quick Card */}
+              {/* Lead Card */}
               <div className="p-3.5 rounded-xl bg-surface-container-low/40 border border-foreground/5 dark:border-white/5 flex items-center gap-3 text-left w-full">
                 {projectLead.avatarUrl ? (
-                  // biome-ignore lint/performance/noImgElement: avatar picture
+                  // biome-ignore lint/performance/noImgElement: Lead avatar
                   <img
                     src={projectLead.avatarUrl}
                     alt={projectLead.name}
@@ -589,34 +649,33 @@ export default function ProjectDetails({
         </div>
       </div>
 
-      {/* 4. Team/Contributors Section */}
-      <div
-        ref={teamRef}
-        className="glass-card p-6 md:p-8 rounded-2xl space-y-6"
-      >
-        <div className="flex items-center justify-between border-b border-foreground/5 dark:border-white/5 pb-3">
-          <h2 className="font-body text-lg font-bold text-primary-fixed uppercase tracking-wider flex items-center gap-2">
-            <span className="material-symbols-outlined select-none">
-              groups
+      {/* Team Roster section */}
+      {team.length > 0 && (
+        <div
+          ref={teamRef}
+          className="glass-card p-6 md:p-8 rounded-xl space-y-6"
+        >
+          <div className="flex items-center justify-between border-b border-foreground/5 dark:border-white/5 pb-3">
+            <h2 className="font-body text-lg font-bold text-primary-fixed uppercase tracking-wider flex items-center gap-2">
+              <span className="material-symbols-outlined select-none">
+                groups
+              </span>
+              Team & Contributors
+            </h2>
+            <span className="font-code text-xs text-on-surface-variant font-semibold">
+              {team.length} {team.length === 1 ? "Member" : "Members"} Assigned
             </span>
-            Team & Contributors
-          </h2>
-          <span className="font-code text-xs text-on-surface-variant font-semibold">
-            {team.length} {team.length === 1 ? "Member" : "Members"} Assigned
-          </span>
-        </div>
+          </div>
 
-        {team.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-bento-gap">
             {team.map((member) => (
               <div
                 key={member.id}
                 className="group/member p-4 rounded-xl bg-surface-container/30 border border-foreground/5 dark:border-white/5 hover:border-primary-fixed/20 hover:bg-surface-container-high/30 transition-all duration-300 flex items-center gap-4.5"
               >
-                {/* Member Avatar Placeholder with fallback */}
                 <div className="relative">
                   {member.avatarUrl ? (
-                    // biome-ignore lint/performance/noImgElement: avatar picture
+                    // biome-ignore lint/performance/noImgElement: Member avatar
                     <img
                       src={member.avatarUrl}
                       alt={member.name}
@@ -631,7 +690,6 @@ export default function ProjectDetails({
                       {getInitials(member.name)}
                     </div>
                   )}
-                  {/* Subtle decorative hover indicator */}
                   <div className="absolute inset-0 rounded-full border border-primary-fixed/0 group-hover/member:border-primary-fixed/20 scale-105 transition-all duration-300" />
                 </div>
 
@@ -658,14 +716,8 @@ export default function ProjectDetails({
               </div>
             ))}
           </div>
-        ) : (
-          <div className="text-center py-8">
-            <p className="font-body text-sm text-on-surface-variant">
-              No team members assigned to this project yet.
-            </p>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
